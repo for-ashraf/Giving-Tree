@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Toastr;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePermissionRequest;
 use App\Http\Requests\UpdatePermissionRequest;
@@ -33,12 +34,12 @@ class PermissionController extends Controller
         $permission->name = $request->name;
 
         if ($permission->save()) {
-            toast('Permission successfully created!','success');
+            Toastr::success('Permission successfully created!', 'Success');
             return redirect()->route('admin.permissions.index');
         }
-        toast('Whoops! Permission create failed', 'error');
-        return redirect()->back();
 
+        Toastr::error('Whoops! Permission create failed', 'Error');
+        return redirect()->back();
     }
 
     public function edit(Permission $permission)
@@ -51,7 +52,7 @@ class PermissionController extends Controller
     public function update(UpdatePermissionRequest $request, Permission $permission)
     {
         $permission->update($request->all());
-        toast('Permission successfully updated!','success');
+        Toastr::success('Permission successfully updated!', 'Success');
         return redirect()->route('admin.permissions.index');
     }
 

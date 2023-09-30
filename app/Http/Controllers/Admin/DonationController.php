@@ -1,20 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Categories;
+use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Donations;
 use App\Models\SubCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\HttpFoundation\Response;
 
-class DonationsController extends Controller
+class DonationController extends Controller
 {
     public function loadCategories()
     {
-        return Categories::all();
+        return Category::all();
     }
-
+    public function index()
+    {
+        $donations = Donations::all();
+        $categories = Category::all();
+        return view('admin.donations.index', compact('categories','donations'));
+    }
     public function loadSubcategories(Request $request)
     {
         $category = $request->input('category');
@@ -25,7 +33,7 @@ class DonationsController extends Controller
     public function create()
     {
         $categories = $this->loadCategories();
-        return view('donations.create', compact('categories'));
+        return view('admin.donations.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -46,7 +54,7 @@ class DonationsController extends Controller
 
         $donation = Donations::create($validatedData);
 
-        return redirect()->route('donations.index')->with('success', 'Donation added successfully!');
+        return redirect()->route('admin.donations.index')->with('success', 'Donation added successfully!');
     }
 
     public function edit($id)
@@ -55,7 +63,7 @@ class DonationsController extends Controller
         $categories = $this->loadCategories();
         $subcategories = SubCategories::where('category_id', $donation->item_category_id)->get();
 
-        return view('donations.edit', compact('donation', 'categories', 'subcategories'));
+        return view('admin.donations.edit', compact('donation', 'categories', 'subcategories'));
     }
 
     public function update(Request $request, $id)
@@ -78,7 +86,7 @@ class DonationsController extends Controller
 
         $donation->update($validatedData);
 
-        return redirect()->route('donations.index')->with('success', 'Donation updated successfully!');
+        return redirect()->route('admin.donations.index')->with('success', 'Donation updated successfully!');
     }
 
     public function destroy($id)
@@ -86,6 +94,6 @@ class DonationsController extends Controller
         $donation = Donations::findOrFail($id);
         $donation->delete();
 
-        return redirect()->route('donations.index')->with('success', 'Donation deleted successfully!');
+        return redirect()->route('admin.donations.index')->with('success', 'Donation deleted successfully!');
     }
 }

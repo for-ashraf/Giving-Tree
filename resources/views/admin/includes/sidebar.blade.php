@@ -47,6 +47,14 @@
                 </a>
             </li>
             @endcan
+            @can('donation_access')
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('donations*')) ? 'active' : '' }}" href="{{ route('admin.donations.index') }}">
+                    <span data-feather="list" class="align-text-bottom"></span>
+                    Donations
+                </a>
+            </li>
+            @endcan
             @can('tag_access')
             <li class="nav-item">
                 <a class="nav-link {{ (request()->is('admin/tags*')) ? 'active' : '' }}" href="{{ route('admin.tags.index') }}">

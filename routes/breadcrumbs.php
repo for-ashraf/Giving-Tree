@@ -100,3 +100,7 @@ Breadcrumbs::for('admin.password.index', function (BreadcrumbTrail $trail): void
     $trail->parent('admin.index');
     $trail->push('Change Password', route('admin.password.index'));
 });
+Breadcrumbs::for('admin.donations.index', function ($trail) {
+    $trail->parent('admin.index');
+    $trail->push('Donations', route('admin.donations.index'));
+});

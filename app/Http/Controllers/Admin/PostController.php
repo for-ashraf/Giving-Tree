@@ -138,8 +138,8 @@ class PostController extends Controller
             });
 
             $post->tags()->sync($tagsId);
+            return redirect()->route('admin.posts.index')->with('message', 'Post updated successfully!');
 
-            return redirect()->back()->with('message','Post updated successfully');
         }
         return redirect()->back()->with('error','Whoops!!');
     }
