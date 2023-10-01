@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 29, 2023 at 07:43 PM
+-- Generation Time: Oct 01, 2023 at 06:45 PM
 -- Server version: 8.0.27
 -- PHP Version: 7.3.33
 
@@ -47,17 +47,81 @@ CREATE TABLE IF NOT EXISTS `blog_comments` (
 DROP TABLE IF EXISTS `campaigns`;
 CREATE TABLE IF NOT EXISTS `campaigns` (
   `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` bigint UNSIGNED DEFAULT NULL,
   `title` varchar(255) NOT NULL,
   `description` text,
-  `theme` varchar(50) DEFAULT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `status` enum('active','completed','deactivated') DEFAULT 'active',
-  `views_count` int DEFAULT '0',
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `is_money_involved` enum('Yes','No') NOT NULL DEFAULT 'Yes',
+  `target_amount` decimal(10,2) NOT NULL,
+  `current_amount` decimal(10,2) NOT NULL,
+  `campaign_status` enum('Active','Closed') NOT NULL DEFAULT 'Active',
+  `campaign_type` varchar(70) NOT NULL,
+  `organizer` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `contact_person` varchar(100) NOT NULL,
+  `contact_email` varchar(255) NOT NULL,
+  `contact_phone` varchar(20) NOT NULL,
+  `volunteer_opportunities` text,
+  `campaign_address` varchar(250) DEFAULT NULL,
+  `campaign_image` varchar(255) DEFAULT NULL,
+  `donor_instructions` text,
+  `Created_At` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Updated_At` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `campaigns`
+--
+
+INSERT INTO `campaigns` (`id`, `user_id`, `title`, `description`, `start_date`, `end_date`, `is_money_involved`, `target_amount`, `current_amount`, `campaign_status`, `campaign_type`, `organizer`, `contact_person`, `contact_email`, `contact_phone`, `volunteer_opportunities`, `campaign_address`, `campaign_image`, `donor_instructions`, `Created_At`, `Updated_At`) VALUES
+(1, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:23', '2023-10-01 12:04:23'),
+(2, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:23', '2023-10-01 12:04:23'),
+(3, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:24', '2023-10-01 12:04:24'),
+(4, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:24', '2023-10-01 12:04:24'),
+(5, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:25', '2023-10-01 12:04:25'),
+(6, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:25', '2023-10-01 12:04:25'),
+(7, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:25', '2023-10-01 12:04:25'),
+(8, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:26', '2023-10-01 12:04:26'),
+(9, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:26', '2023-10-01 12:04:26'),
+(10, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:26', '2023-10-01 12:04:26'),
+(11, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:27', '2023-10-01 12:04:27'),
+(12, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:27', '2023-10-01 12:04:27'),
+(13, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:28', '2023-10-01 12:04:28'),
+(14, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:28', '2023-10-01 12:04:28'),
+(15, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:28', '2023-10-01 12:04:28'),
+(16, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:29', '2023-10-01 12:04:29'),
+(17, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:29', '2023-10-01 12:04:29'),
+(18, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:29', '2023-10-01 12:04:29'),
+(19, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:30', '2023-10-01 12:04:30'),
+(20, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:30', '2023-10-01 12:04:30'),
+(21, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:31', '2023-10-01 12:04:31'),
+(22, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:31', '2023-10-01 12:04:31'),
+(23, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:31', '2023-10-01 12:04:31'),
+(24, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:32', '2023-10-01 12:04:32'),
+(25, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:32', '2023-10-01 12:04:32'),
+(26, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:32', '2023-10-01 12:04:32'),
+(27, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:33', '2023-10-01 12:04:33'),
+(28, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:33', '2023-10-01 12:04:33'),
+(29, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:33', '2023-10-01 12:04:33'),
+(30, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:34', '2023-10-01 12:04:34'),
+(31, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:34', '2023-10-01 12:04:34'),
+(32, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:34', '2023-10-01 12:04:34'),
+(33, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:35', '2023-10-01 12:04:35'),
+(34, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:35', '2023-10-01 12:04:35'),
+(35, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:35', '2023-10-01 12:04:35'),
+(36, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:36', '2023-10-01 12:04:36'),
+(37, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:36', '2023-10-01 12:04:36'),
+(38, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:37', '2023-10-01 12:04:37'),
+(39, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:37', '2023-10-01 12:04:37'),
+(40, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:38', '2023-10-01 12:04:38'),
+(41, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:38', '2023-10-01 12:04:38'),
+(42, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:39', '2023-10-01 12:04:39'),
+(43, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', NULL, NULL, '2023-10-01 12:04:40', '2023-10-01 12:04:40'),
+(45, 1, 'First compaing', 'First Description', '2023-10-01', '2023-10-02', 'Yes', '200.00', '0.00', 'Active', 'Flood Relief', 'Hafiza', 'Hafiza and Group', 'hafiza@hafiza.com', '03003003000', 'None', 'FGPG College', '45.jpg', NULL, '2023-10-01 12:09:45', '2023-10-01 12:09:45'),
+(46, 1, 'Second Compaign', 'Second Campaign', '2023-10-01', '2023-10-02', 'Yes', '300.00', '0.00', 'Active', 'Animal Support', 'Its me', 'Hafiza', 'hafiza@hafiza.com', '0300000000', 'None', 'Oval Cricket Ground', '46.jpg', NULL, '2023-10-01 13:06:18', '2023-10-01 13:06:18'),
+(47, 1, 'Third Title', 'Third Description', '2023-10-01', '2023-10-02', 'Yes', '400.00', '0.00', 'Active', 'Animal Support', 'Its me', 'Hafiza', 'hafiza@hafiza.com', '03332336345', 'Nothing special', 'Wah Cantt', '47.jpg', NULL, '2023-10-01 13:24:59', '2023-10-01 13:24:59');
 
 -- --------------------------------------------------------
 
@@ -144,18 +208,24 @@ CREATE TABLE IF NOT EXISTS `donations` (
   `item_condition` varchar(50) DEFAULT NULL,
   `item_category` varchar(50) DEFAULT NULL,
   `sub_category` varchar(50) DEFAULT NULL,
+  `image` varchar(150) NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
   `likes_count` int DEFAULT '0',
   `status` enum('active','completed','deactivated') DEFAULT 'active',
   `views_count` int DEFAULT '0',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `item_category_id` bigint UNSIGNED DEFAULT NULL,
-  `sub_category_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `item_category_id` (`item_category_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `donations`
+--
+
+INSERT INTO `donations` (`id`, `title`, `description`, `item_condition`, `item_category`, `sub_category`, `image`, `user_id`, `likes_count`, `status`, `views_count`, `created_at`, `updated_at`) VALUES
+(3, 'First Title', 'First Description', 'New', '1', NULL, '3.jpg', NULL, 0, 'active', 0, '2023-10-01 05:16:04', '2023-10-01 05:16:04'),
+(4, 'Second Title', 'Second Description', 'Used-Like New', '6', NULL, '4.jpg', NULL, 0, 'active', 0, '2023-10-01 05:16:31', '2023-10-01 05:16:44');
 
 -- --------------------------------------------------------
 
@@ -252,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `permissions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `permissions_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `permissions`
@@ -285,7 +355,15 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (24, 'tag_delete', 'web', '2023-09-28 01:41:55', '2023-09-28 01:41:55'),
 (25, 'comment_access', 'web', '2023-09-28 01:41:55', '2023-09-28 01:41:55'),
 (26, 'comment_edit', 'web', '2023-09-28 01:41:55', '2023-09-28 01:41:55'),
-(27, 'comment_delete', 'web', '2023-09-28 01:41:55', '2023-09-28 01:41:55');
+(27, 'comment_delete', 'web', '2023-09-28 01:41:55', '2023-09-28 01:41:55'),
+(28, 'donation_access', 'web', '2023-09-30 02:38:32', '2023-09-30 02:38:32'),
+(30, 'donation_create', 'web', '2023-09-30 02:38:32', '2023-09-30 02:38:32'),
+(31, 'donation_edit', 'web', '2023-09-30 02:38:32', '2023-09-30 02:38:32'),
+(32, 'donation_delete', 'web', '2023-09-30 02:38:32', '2023-09-30 02:38:32'),
+(33, 'campaign_access', 'web', '2023-10-01 11:09:43', '2023-10-01 11:09:43'),
+(34, 'campaign_create', 'web', '2023-10-01 11:09:43', '2023-10-01 11:09:43'),
+(35, 'campaign_edit', 'web', '2023-10-01 11:09:43', '2023-10-01 11:09:43'),
+(36, 'campaign_delete', 'web', '2023-10-01 11:09:43', '2023-10-01 11:09:43');
 
 -- --------------------------------------------------------
 
@@ -306,7 +384,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `posts`
@@ -332,7 +410,8 @@ INSERT INTO `posts` (`id`, `title`, `category_id`, `body`, `thumbnail`, `created
 (17, 'Eos dignissimos aut unde.', 1, 'Porro earum vel sint rerum accusamus. Sint quo alias tenetur temporibus tempore. Reiciendis consequatur facere aut reiciendis itaque architecto quia fugit. Non nesciunt commodi qui ut cum possimus tempore.', NULL, 1, 1, 0, '2023-09-28 01:41:56', '2023-09-28 01:41:56'),
 (18, 'Nisi delectus accusamus accusamus autem.', 1, 'Qui officia consequatur ex deleniti nisi voluptatibus commodi veniam. Quis ut optio dolorem et omnis nemo. Saepe veniam commodi et earum harum molestiae quaerat. At praesentium consequatur magni excepturi.', NULL, 1, 1, 0, '2023-09-28 01:41:56', '2023-09-28 01:41:56'),
 (19, 'Nam modi aut veniam dolor sit necessitatibus et.', 1, 'Nobis voluptatem fuga velit a voluptatibus. Provident est minus tenetur itaque provident. Molestiae soluta modi accusamus doloremque.', NULL, 1, 1, 0, '2023-09-28 01:41:56', '2023-09-28 01:41:56'),
-(20, 'Esse eum cum incidunt sit fuga vero dicta.', 1, 'In omnis quos inventore vitae. Velit officiis cum officiis quo ut autem consequatur. Optio architecto adipisci hic sunt doloribus. Doloribus natus dolore laboriosam laudantium eos quae.', NULL, 1, 1, 0, '2023-09-28 01:41:56', '2023-09-28 01:41:56');
+(20, 'Esse eum cum incidunt sit fuga vero dicta.', 1, 'In omnis quos inventore vitae. Velit officiis cum officiis quo ut autem consequatur. Optio architecto adipisci hic sunt doloribus. Doloribus natus dolore laboriosam laudantium eos quae.', NULL, 1, 1, 0, '2023-09-28 01:41:56', '2023-09-28 01:41:56'),
+(21, 'asdf', 1, '<p>asdfsadf</p>', '1696056825.jpg', 1, 1, 0, '2023-09-30 01:53:45', '2023-09-30 01:53:45');
 
 -- --------------------------------------------------------
 
@@ -348,7 +427,14 @@ CREATE TABLE IF NOT EXISTS `post_tag` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `post_tag`
+--
+
+INSERT INTO `post_tag` (`id`, `post_id`, `tag_id`, `created_at`, `updated_at`) VALUES
+(1, 21, 1, '2023-09-30 01:55:48', '2023-09-30 01:55:48');
 
 -- --------------------------------------------------------
 
@@ -365,7 +451,7 @@ CREATE TABLE IF NOT EXISTS `roles` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_name_guard_name_unique` (`name`,`guard_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -420,7 +506,12 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (24, 1),
 (25, 1),
 (26, 1),
-(27, 1);
+(27, 1),
+(28, 1),
+(33, 1),
+(34, 1),
+(35, 1),
+(36, 1);
 
 -- --------------------------------------------------------
 
@@ -452,7 +543,14 @@ CREATE TABLE IF NOT EXISTS `tags` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tags`
+--
+
+INSERT INTO `tags` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'help', '2023-09-30 01:55:21', '2023-09-30 01:55:29');
 
 -- --------------------------------------------------------
 
@@ -514,8 +612,7 @@ ALTER TABLE `conversations`
 -- Constraints for table `donations`
 --
 ALTER TABLE `donations`
-  ADD CONSTRAINT `donations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-  ADD CONSTRAINT `donations_ibfk_2` FOREIGN KEY (`item_category_id`) REFERENCES `categories` (`id`);
+  ADD CONSTRAINT `donations_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `model_has_permissions`
