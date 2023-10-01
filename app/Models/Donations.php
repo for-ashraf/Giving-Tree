@@ -21,6 +21,7 @@ class Donations extends Model
         'views_count',
         'item_category_id',
         'sub_category_id',
+        'image',
     ];
 
     // Define any relationships or additional methods here

@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Donations;
-use App\Models\SubCategories;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Log;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class DonationController extends Controller
 {
@@ -22,12 +20,6 @@ class DonationController extends Controller
         $donations = Donations::all();
         $categories = Category::all();
         return view('admin.donations.index', compact('categories','donations'));
-    }
-    public function loadSubcategories(Request $request)
-    {
-        $category = $request->input('category');
-        $subcategories = SubCategories::where('category_id', $category)->get();
-        return response()->json($subcategories);
     }
 
     public function create()
@@ -43,17 +35,27 @@ class DonationController extends Controller
             'description' => 'nullable|string',
             'item_condition' => 'nullable|string|max:50',
             'item_category' => 'nullable|string|max:50',
-            'sub_category' => 'nullable|string|max:50',
             'user_id' => 'nullable|numeric|unsigned',
-            'likes_count' => 'nullable|integer',
+            'image' => 'nullable|image|mimes:jpg|max:2048',
             'status' => 'nullable|in:active,completed,deactivated',
-            'views_count' => 'nullable|integer',
             'item_category_id' => 'nullable|numeric|unsigned',
-            'sub_category_id' => 'nullable|integer',
+         
         ]);
 
         $donation = Donations::create($validatedData);
-
+    
+        try {
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileName = $donation->id . '.' . $file->getClientOriginalExtension();
+                $file->move('uploads/donations', $fileName);
+                $donation->update(['image' => $fileName]);
+            }
+        } catch (\Exception $e) {
+            Log::error('File upload failed: ' . $e->getMessage());
+        }
+        // Handle category_image file upload here if needed
+     
         return redirect()->route('admin.donations.index')->with('success', 'Donation added successfully!');
     }
 
@@ -61,37 +63,46 @@ class DonationController extends Controller
     {
         $donation = Donations::findOrFail($id);
         $categories = $this->loadCategories();
-        $subcategories = SubCategories::where('category_id', $donation->item_category_id)->get();
 
-        return view('admin.donations.edit', compact('donation', 'categories', 'subcategories'));
+        return view('admin.donations.edit', compact('donation', 'categories'));
     }
-
-    public function update(Request $request, $id)
+    public function update(Request $request, Donations $donation)
     {
-        $donation = Donations::findOrFail($id);
-
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'item_condition' => 'nullable|string|max:50',
             'item_category' => 'nullable|string|max:50',
-            'sub_category' => 'nullable|string|max:50',
             'user_id' => 'nullable|numeric|unsigned',
-            'likes_count' => 'nullable|integer',
+            'image' => 'nullable|image|mimes:jpg|max:2048',
             'status' => 'nullable|in:active,completed,deactivated',
-            'views_count' => 'nullable|integer',
             'item_category_id' => 'nullable|numeric|unsigned',
-            'sub_category_id' => 'nullable|integer',
         ]);
-
+    
         $donation->update($validatedData);
-
+    
+        try {
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $fileName = $donation->id . '.' . $file->getClientOriginalExtension();
+                $file->move('uploads/donations', $fileName);
+                $donation->update(['image' => $fileName]);
+            }
+        } catch (\Exception $e) {
+            Log::error('File upload failed: ' . $e->getMessage());
+        }
+    
         return redirect()->route('admin.donations.index')->with('success', 'Donation updated successfully!');
     }
 
     public function destroy($id)
     {
-        $donation = Donations::findOrFail($id);
+           $donation = Donations::findOrFail($id);
+     
+            if ($donation->image) {
+                unlink(public_path('uploads/donations/' . $donation->image));
+            }
+    
         $donation->delete();
 
         return redirect()->route('admin.donations.index')->with('success', 'Donation deleted successfully!');

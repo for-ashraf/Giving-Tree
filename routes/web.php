@@ -26,6 +26,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Categories Routes
     Route::resource('categories', CategoryController::class);
     Route::resource('donations', DonationController::class); // Replace 'DonationController' with your actual controller name
+    
     Route::resource('/tags', 'TagController', ['except' => ['show']]);
     Route::resource('/comments', 'CommentController', ['only' => ['index', 'destroy']]);
     Route::resource('users', UserController::class);
@@ -38,4 +39,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::put('profile-update', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('change-password', [ProfileController::class, 'password'])->name('password.index');
     Route::put('update-password', [ProfileController::class, 'updatePassword'])->name('password.update');
+    
 });

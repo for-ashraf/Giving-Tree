@@ -18,9 +18,8 @@
                         <th>Description</th> {{-- New field for description --}}
                         <th>Item Condition</th> {{-- New field for item_condition --}}
                         <th>Item Category</th> {{-- New field for item_category --}}
-                        <th>Sub Category</th> {{-- New field for sub_category --}}
                         <th>User</th> {{-- New field for user_id --}}
-                        <th>Likes Count</th> {{-- New field for likes_count --}}
+                        <th>Image</th> {{-- New field for likes_count --}}
                         <th>Status</th> {{-- New field for status --}}
                         <th>Views Count</th> {{-- New field for views_count --}}
                         <th>Created At</th>
@@ -35,9 +34,8 @@
                             <td>{{ $donation->description }}</td> {{-- Display description --}}
                             <td>{{ $donation->item_condition }}</td> {{-- Display item_condition --}}
                             <td>{{ $donation->item_category }}</td> {{-- Display item_category --}}
-                            <td>{{ $donation->sub_category }}</td> {{-- Display sub_category --}}
                             <td>{{ $donation->user_id }}</td> {{-- Display user_id --}}
-                            <td>{{ $donation->likes_count }}</td> {{-- Display likes_count --}}
+                            <td ><img style="width: 100px;height:100px;" src="../uploads/donations/{{$donation->image }}"></td> {{-- Display category_image --}}
                             <td>{{ $donation->status }}</td> {{-- Display status --}}
                             <td>{{ $donation->views_count }}</td> {{-- Display views_count --}}
                             <td>{{ $donation->created_at->format('d M Y') }}</td>

@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Donations;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 use Spatie\Permission\Models\Permission;
@@ -104,3 +105,18 @@ Breadcrumbs::for('admin.donations.index', function ($trail) {
     $trail->parent('admin.index');
     $trail->push('Donations', route('admin.donations.index'));
 });
+Breadcrumbs::for('admin.donations.create', function ($trail) {
+    $trail->parent('admin.donations.index');
+    $trail->push('Donations', route('admin.donations.create'));
+});
+
+Breadcrumbs::for('admin.donations.edit', function (BreadcrumbTrail $trail, $donationId): void {
+    // Retrieve the Donations model instance based on the $donationId
+    $donation = Donations::findOrFail($donationId);
+
+    $trail->parent('admin.donations.index');
+    $trail->push($donation->title, route('admin.donations.edit', $donation));
+});
+
+
+
