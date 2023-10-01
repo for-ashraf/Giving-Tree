@@ -1,2 +1,2 @@
-- in donations current user is not being saved
+- Check if donations is saving the current user
 - Toaste error while adding permissions
