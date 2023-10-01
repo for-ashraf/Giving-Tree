@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Campaign;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\Donations;
@@ -103,11 +104,11 @@ Breadcrumbs::for('admin.password.index', function (BreadcrumbTrail $trail): void
 });
 Breadcrumbs::for('admin.donations.index', function ($trail) {
     $trail->parent('admin.index');
-    $trail->push('Donations', route('admin.donations.index'));
+    $trail->push('List', route('admin.donations.index'));
 });
 Breadcrumbs::for('admin.donations.create', function ($trail) {
     $trail->parent('admin.donations.index');
-    $trail->push('Donations', route('admin.donations.create'));
+    $trail->push('Create', route('admin.donations.create'));
 });
 
 Breadcrumbs::for('admin.donations.edit', function (BreadcrumbTrail $trail, $donationId): void {
@@ -116,6 +117,23 @@ Breadcrumbs::for('admin.donations.edit', function (BreadcrumbTrail $trail, $dona
 
     $trail->parent('admin.donations.index');
     $trail->push($donation->title, route('admin.donations.edit', $donation));
+});
+
+Breadcrumbs::for('admin.campaigns.index', function ($trail) {
+    $trail->parent('admin.index');
+    $trail->push('List', route('admin.campaigns.index'));
+});
+Breadcrumbs::for('admin.campaigns.create', function ($trail) {
+    $trail->parent('admin.campaigns.index');
+    $trail->push('Create', route('admin.campaigns.create'));
+});
+
+Breadcrumbs::for('admin.campaigns.edit', function (BreadcrumbTrail $trail, $campaignId): void {
+    // Retrieve the Donations model instance based on the $donationId
+    $campaign = Campaign::findOrFail($campaignId);
+
+    $trail->parent('admin.campaigns.index');
+    $trail->push($campaign->title, route('admin.campaigns.edit', $campaign));
 });
 
 

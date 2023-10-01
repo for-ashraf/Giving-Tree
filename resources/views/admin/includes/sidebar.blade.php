@@ -55,6 +55,14 @@
                 </a>
             </li>
             @endcan
+            @can('campaign_access')
+            <li class="nav-item">
+                <a class="nav-link {{ (request()->is('campaigns*')) ? 'active' : '' }}" href="{{ route('admin.campaigns.index') }}">
+                    <span data-feather="list" class="align-text-bottom"></span>
+                    Campaigns
+                </a>
+            </li>
+            @endcan
             @can('tag_access')
             <li class="nav-item">
                 <a class="nav-link {{ (request()->is('admin/tags*')) ? 'active' : '' }}" href="{{ route('admin.tags.index') }}">

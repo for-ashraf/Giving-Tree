@@ -1,0 +1,2 @@
+- in donations current user is not being saved
+- Toaste error while adding permissions

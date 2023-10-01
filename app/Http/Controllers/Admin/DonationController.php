@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Donations;
-
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
 
 
@@ -41,6 +41,10 @@ class DonationController extends Controller
             'item_category_id' => 'nullable|numeric|unsigned',
          
         ]);
+        $user_id = auth()->user()->id;
+
+        // Add the user_id to the validated data
+        $validatedData['user_id'] = $user_id;
 
         $donation = Donations::create($validatedData);
     

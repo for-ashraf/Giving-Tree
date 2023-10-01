@@ -6,9 +6,10 @@ use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\RoleController;
-use App\Http\Controllers\Admin\DonationController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DonationController;
+use App\Http\Controllers\Admin\CampaignController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -26,7 +27,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Categories Routes
     Route::resource('categories', CategoryController::class);
     Route::resource('donations', DonationController::class); // Replace 'DonationController' with your actual controller name
-    
+    Route::resource('campaigns', CampaignController::class);
     Route::resource('/tags', 'TagController', ['except' => ['show']]);
     Route::resource('/comments', 'CommentController', ['only' => ['index', 'destroy']]);
     Route::resource('users', UserController::class);
